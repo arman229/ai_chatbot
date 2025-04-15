@@ -1,0 +1,14 @@
+ 
+#readme-button {
+    display: none !important;
+}
+.prose .animate-pulse {
+    display: none !important;
+}
+.prose span {
+    display: none !important;
+}
+/* img[src*="/avatars/"] {
+    display: none !important;
+}
+  */
