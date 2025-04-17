@@ -8,12 +8,15 @@ authors = [
 ]
 requires-python = ">=3.12"
 dependencies = [
-    "chainlit>=2.4.400",
+    "chainlit>=2.5.5",
     "fastapi[standard]>=0.115.12",
-    "openai-agents>=0.0.9",
+    "openai-agents>=0.0.11",
     "python-dotenv>=1.1.0",
-    "uvicorn>=0.34.0"
+    "uvicorn[standard]>=0.34.1",
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
 
 [project.scripts]
 chatbot = "chatbot:main"

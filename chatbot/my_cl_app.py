@@ -69,11 +69,12 @@ async def main(message: cl.Message):
         result = Runner.run_streamed(agent, history, run_config=config)
         async for event in result.stream_events():
             if event.type == "raw_response_event" and hasattr(event.data, "delta"):
-                token = event.data.delta
+                token = event.data.delta 
                 await msg.stream_token(token)
         history.append({"role": "assistant", "content": msg.content})
         cl.user_session.set("chat_history", history)
 
     except Exception as e:
         await msg.update(content=f"Error: {str(e)}")
-        print(f"Error: {str(e)}")
+        print(f"Error: {str(e)}")    
+    

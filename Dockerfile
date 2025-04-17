@@ -1,15 +1,7 @@
-FROM python:3.12
-LABEL maintainer='Arman ashraf'
-
-RUN useradd -m -u 1000 user
-USER user
-ENV PATH="/home/user/.local/bin:$PATH"
-
+FROM python:3.12-slim 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/ 
+RUN mkdir -p /app/.files && chmod -R 777 /app/.files
+COPY . /app 
 WORKDIR /app
-
-COPY --chown=user requirements.txt requirements.txt
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
-
-COPY --chown=user . /app  
-
-CMD ["uvicorn", "chatbot.main:app", "--host", "0.0.0.0", "--port", "7860"]
+RUN uv sync --frozen --no-cache  
+CMD ["/app/.venv/bin/uvicorn", "chatbot.main:app","--host", "0.0.0.0", "--port", "7860"]
